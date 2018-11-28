@@ -37,8 +37,13 @@ public class Elevens {
         // End of Card Value Assignment
         
         File[] Deck = new File("src/cards").listFiles(); 
-        System.out.println("Test: "+cd.get(Deck[0].getName()));
         shuffleDeck(Deck);
+        
+        /** Personal Reference for Accessors
+        String fl = Deck[1].getName();
+        String flx = fl.replace(".png","");
+        System.out.println("Test: "+cd.get(flx));
+        */
     }
     
     public static void shuffleDeck(File Deck[]){
