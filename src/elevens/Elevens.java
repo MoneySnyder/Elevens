@@ -20,6 +20,25 @@ public class Elevens {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
+        File[] Deck = new File("src/cards").listFiles(); 
+        shuffleDeck(Deck);
+        returnValue(Deck[1]);
+        GamemodeWindow.displayGUI();
+    }
+    
+    public static void shuffleDeck(File Deck[]){
+        // Shuffle Based on a Deck of 52 Cards
+        Random x = new Random();
+        for(int i = 0; i < 52; i++){
+            int y = i+x.nextInt(52-i);
+            File temp = Deck[y];
+            Deck[y] = Deck[i];
+            Deck[i] = temp;
+        }
+    }
+    
+    public static int returnValue(File Card){
+        // Start of Card Value Assignment
         Map<String, String> cd = new HashMap<String, String>();
         cd.put("2_of_clubs","2");cd.put("2_of_diamonds","2");cd.put("2_of_hearts","2");cd.put("2_of_spades","2");
         cd.put("3_of_clubs","3");cd.put("3_of_diamonds","3");cd.put("3_of_hearts","3");cd.put("3_of_spades","3");
@@ -36,25 +55,11 @@ public class Elevens {
         cd.put("ace_of_clubs","11");cd.put("ace_of_diamonds","11");cd.put("ace_of_hearts","11");cd.put("ace_of_spades","11");
         // End of Card Value Assignment
         
-        File[] Deck = new File("src/cards").listFiles(); 
-        shuffleDeck(Deck);
+        String key = Card.getName();
+        String accessor = key.replace(".png","");
+        System.out.println("Value of "+accessor+" is "+cd.get(accessor));
         
-        /** Personal Reference for Accessors
-        String fl = Deck[1].getName();
-        String flx = fl.replace(".png","");
-        System.out.println("Test: "+cd.get(flx));
-        */
-    }
-    
-    public static void shuffleDeck(File Deck[]){
-        // Shuffle Based on a Deck of 52 Cards
-        Random x = new Random();
-        for(int i = 0; i < 52; i++){
-            int y = i+x.nextInt(52-i);
-            File temp = Deck[y];
-            Deck[y] = Deck[i];
-            Deck[i] = temp;
-        }
+        return Integer.parseInt(cd.get(accessor));
     }
     
 }
