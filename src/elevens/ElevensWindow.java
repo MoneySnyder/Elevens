@@ -300,6 +300,7 @@ public final class ElevensWindow extends javax.swing.JFrame {
     
     public static Map<JButton, String> buttonList = new HashMap<JButton, String>();
     public static Map<JButton, String> currentlyActive = new HashMap<JButton, String>();
+    public static Map<JButton, String> currentValues = new HashMap<JButton, String>();
     
     public void startGame(){
         Container buttonLayout = jPanel5;
@@ -319,30 +320,31 @@ public final class ElevensWindow extends javax.swing.JFrame {
             button.setBackground(new java.awt.Color(34, 180, 66));
             button.setOpaque(false);
             button.setName(file.getName());
+            currentValues.put(button, String.valueOf(value));
             deckposition = 9;
             
             buttonList.put(button, "not active");
             button.addActionListener(new ActionListener() {
-                int updatedvalue = Elevens.returnString(button.getName());
                     public void actionPerformed(ActionEvent ae) {
                         // Set Debounce
                         System.out.println("Activity is currently: "+ buttonList.get(button));
-                        System.out.println("Initial value was: "+value+" Current value is: "+updatedvalue);
+                        System.out.println("Initial value was: "+value+" Current value is: "+Integer.parseInt(currentValues.get(button)));
                         String status = buttonList.get(button);
 
                         // If Less Than Two Active
-                        if(currentlyActive.size()<2 && !(updatedvalue==99)){
+                        if(currentlyActive.size()<2 && !(Integer.parseInt(currentValues.get(button))==99)){
                             if(status.equals("not active")){
                                 button.setContentAreaFilled(true);
                                 button.setOpaque(true);
                                 buttonList.replace(button,"active");
-                                currentlyActive.put(button,String.valueOf(updatedvalue));
+                                currentlyActive.put(button,String.valueOf(Integer.parseInt(currentValues.get(button))));
                                 boolean isPair = checkPair();
                                 if(isPair){
                                     button.setContentAreaFilled(false);
                                     button.setOpaque(false);
                                     buttonList.replace(button,"not active");
                                     currentlyActive.remove(button);
+                                    currentValues.put(button, String.valueOf(Elevens.returnString(button.getName())));
                                 }
                             }
                         }
@@ -354,31 +356,34 @@ public final class ElevensWindow extends javax.swing.JFrame {
                         }
                         
                          // Remove Face Cards
-                        if(updatedvalue==99){
+                        if(Integer.parseInt(currentValues.get(button))==99){
                              File filex = Elevens.Deck[deckposition];
                              ImageIcon image = new ImageIcon("src/cards/"+filex.getName());
                              System.out.println("Looking for "+ filex.getName());
                              Image icon = image.getImage().getScaledInstance(100, 145, Image.SCALE_SMOOTH);
                              image.setImage(icon);
                              button.setIcon(image);
-                             updatedvalue = Elevens.returnString(filex.getName());
+                             currentValues.put(button, String.valueOf(Elevens.returnString(filex.getName())));
                              deckposition = deckposition+1;
                              currentlyActive.clear();
                         }
                         
                     }
-                
             });
            
             buttonLayout.add(button);
         }
     }
     
-    public void nextCards(int position){
-        
+    public void prepareDeck(int position){
+        if(position==51){
+            Elevens.shuffleDeck(Elevens.Deck);
+            System.out.println("Deck has been shuffled.");
+        }
     }
     
     public boolean checkPair(){
+        prepareDeck(deckposition);
         int total = 0;
         for(JButton key : currentlyActive.keySet()){
             total = total + Integer.parseInt(currentlyActive.get(key));
@@ -405,6 +410,7 @@ public final class ElevensWindow extends javax.swing.JFrame {
             key.setOpaque(false);
             key.setName(file.getName());
             buttonList.replace(key,"not active");
+            currentValues.replace(key,String.valueOf(Elevens.returnString(file.getName())));
             deckposition = deckposition+1;
         }
         currentlyActive.clear();

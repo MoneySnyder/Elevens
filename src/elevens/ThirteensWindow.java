@@ -4,20 +4,36 @@
  * and open the template in the editor.
  */
 package elevens;
+//100x145
+
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.BorderFactory;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.border.Border;
 
 /**
  *
  * @author cs.evsnyder
  */
-public class GamemodeWindow extends javax.swing.JFrame {
+public final class ThirteensWindow extends javax.swing.JFrame {
 
+    int deckposition;
     /**
      * Creates new form GamemodeWindow
      */
     
-    public GamemodeWindow() {
+    public ThirteensWindow() {
         initComponents();
         jLabel4.setText("Welcome, "+System.getProperty("user.name"));
+        startGame();
     }
 
     /**
@@ -33,16 +49,10 @@ public class GamemodeWindow extends javax.swing.JFrame {
         jButton5 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jLabel6 = new javax.swing.JLabel();
         jPanel5 = new javax.swing.JPanel();
-        jButton2 = new javax.swing.JButton();
-        jLabel7 = new javax.swing.JLabel();
-        jPanel6 = new javax.swing.JPanel();
-        jButton3 = new javax.swing.JButton();
-        jLabel5 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -74,27 +84,44 @@ public class GamemodeWindow extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Segoe UI", 2, 12)); // NOI18N
         jLabel4.setText("Welcome, ");
 
+        jButton6.setBackground(new java.awt.Color(255, 102, 102));
+        jButton6.setForeground(new java.awt.Color(0, 0, 0));
+        jButton6.setText("<");
+        jButton6.setBorder(null);
+        jButton6.setBorderPainted(false);
+        jButton6.setFocusPainted(false);
+        jButton6.setFocusable(false);
+        jButton6.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton6MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(39, 39, 39)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(49, 49, 49))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jButton5)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(jButton6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(18, Short.MAX_VALUE)
@@ -108,137 +135,24 @@ public class GamemodeWindow extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(34, 165, 63));
 
-        jButton1.setBackground(new java.awt.Color(34, 180, 66));
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Elevens");
-        jButton1.setBorder(null);
-        jButton1.setBorderPainted(false);
-        jButton1.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        jButton1.setDefaultCapable(false);
-        jButton1.setFocusPainted(false);
-        jButton1.setFocusable(false);
-        jButton1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton1MouseClicked(evt);
-            }
-        });
-
-        jLabel6.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel6.setFont(new java.awt.Font("Segoe UI Light", 2, 48)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("11s");
-        jLabel6.setToolTipText("");
-        jLabel6.setAlignmentX(0.5F);
-        jLabel6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jPanel5.setOpaque(false);
+        jPanel5.setLayout(new java.awt.GridLayout(3, 3));
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 397, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 23, Short.MAX_VALUE))
-        );
-
-        jPanel5.setBackground(new java.awt.Color(34, 165, 63));
-
-        jButton2.setBackground(new java.awt.Color(34, 180, 66));
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Twelves");
-        jButton2.setBorder(null);
-        jButton2.setBorderPainted(false);
-        jButton2.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        jButton2.setDefaultCapable(false);
-        jButton2.setFocusPainted(false);
-        jButton2.setFocusable(false);
-        jButton2.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton2MouseClicked(evt);
-            }
-        });
-
-        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel7.setFont(new java.awt.Font("Segoe UI Light", 2, 48)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("12s");
-        jLabel7.setToolTipText("");
-        jLabel7.setAlignmentX(0.5F);
-        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-            .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, 438, Short.MAX_VALUE)
                 .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
-
-        jPanel6.setBackground(new java.awt.Color(34, 165, 63));
-
-        jButton3.setBackground(new java.awt.Color(34, 180, 66));
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Thirteens");
-        jButton3.setBorder(null);
-        jButton3.setBorderPainted(false);
-        jButton3.setDebugGraphicsOptions(javax.swing.DebugGraphics.NONE_OPTION);
-        jButton3.setDefaultCapable(false);
-        jButton3.setFocusPainted(false);
-        jButton3.setFocusable(false);
-        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jButton3MouseClicked(evt);
-            }
-        });
-
-        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel5.setFont(new java.awt.Font("Segoe UI Light", 2, 48)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("13s");
-        jLabel5.setToolTipText("");
-        jLabel5.setAlignmentX(0.5F);
-        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -246,23 +160,16 @@ public class GamemodeWindow extends javax.swing.JFrame {
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(42, 42, 42)
+                .addGap(27, 27, 27)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(45, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(55, 55, 55)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(62, Short.MAX_VALUE))
+                .addGap(27, 27, 27)
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -338,20 +245,10 @@ public class GamemodeWindow extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jButton5MouseClicked
 
-    private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        ElevensWindow.displayGUI();
+    private void jButton6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton6MouseClicked
+        GamemodeWindow.displayGUI();
         setVisible(false);
-    }//GEN-LAST:event_jButton1MouseClicked
-
-    private void jButton2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton2MouseClicked
-        TwelvesWindow.displayGUI();
-        setVisible(false);
-    }//GEN-LAST:event_jButton2MouseClicked
-
-    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
-        ThirteensWindow.displayGUI();
-        setVisible(false);
-    }//GEN-LAST:event_jButton3MouseClicked
+    }//GEN-LAST:event_jButton6MouseClicked
 
     /**
      * @param args the command line arguments
@@ -370,14 +267,63 @@ public class GamemodeWindow extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GamemodeWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThirteensWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GamemodeWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThirteensWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GamemodeWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThirteensWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GamemodeWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ThirteensWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        
+        /* Create and display the form 
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GamemodeWindow().setVisible(true);
+            }
+        //</editor-fold>
+        
+        /* Create and display the form 
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GamemodeWindow().setVisible(true);
+            }
+        //</editor-fold>
+        
+        /* Create and display the form 
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GamemodeWindow().setVisible(true);
+            }
+        //</editor-fold>
+        
+        /* Create and display the form 
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GamemodeWindow().setVisible(true);
+            }
+        //</editor-fold>
+        
+        /* Create and display the form 
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GamemodeWindow().setVisible(true);
+            }
+        //</editor-fold>
+        
+        /* Create and display the form 
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GamemodeWindow().setVisible(true);
+            }
+        //</editor-fold>
+        
+        /* Create and display the form 
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new GamemodeWindow().setVisible(true);
+            }
         //</editor-fold>
         
         /* Create and display the form 
@@ -390,28 +336,137 @@ public class GamemodeWindow extends javax.swing.JFrame {
     String computerusername = System.getProperty("user.name");
     public static void displayGUI(){
         java.awt.EventQueue.invokeLater(() -> {
-            new GamemodeWindow().setVisible(true);
+            new ThirteensWindow().setVisible(true);
         });
     }
     
+    public static Map<JButton, String> buttonList = new HashMap<JButton, String>();
+    public static Map<JButton, String> currentlyActive = new HashMap<JButton, String>();
+    public static Map<JButton, String> currentValues = new HashMap<JButton, String>();
+    
+    public void startGame(){
+        Container buttonLayout = jPanel5;
+        for(int i = 0; i < 9; i++){
+            File file = Elevens.Deck[i];
+            int value = Elevens.returnValue(file);
+            ImageIcon image = new ImageIcon("src/cards/"+file.getName());
+            System.out.println("Looking for "+ file.getName());
+            Image icon = image.getImage().getScaledInstance(100, 145, Image.SCALE_SMOOTH);
+            image.setImage(icon);
+            JButton button = new JButton();
+            button.setIcon(image);
+            button.setFocusable(false);
+            button.setContentAreaFilled(false);
+            Border emptyBorder = BorderFactory.createEmptyBorder();
+            button.setBorder(emptyBorder);
+            button.setBackground(new java.awt.Color(34, 180, 66));
+            button.setOpaque(false);
+            button.setName(file.getName());
+            currentValues.put(button, String.valueOf(value));
+            deckposition = 9;
+            
+            buttonList.put(button, "not active");
+            button.addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent ae) {
+                        // Set Debounce
+                        System.out.println("Activity is currently: "+ buttonList.get(button));
+                        System.out.println("Initial value was: "+value+" Current value is: "+Integer.parseInt(currentValues.get(button)));
+                        String status = buttonList.get(button);
+
+                        // If Less Than Two Active
+                        if(currentlyActive.size()<2 && !(Integer.parseInt(currentValues.get(button))==99)){
+                            if(status.equals("not active")){
+                                button.setContentAreaFilled(true);
+                                button.setOpaque(true);
+                                buttonList.replace(button,"active");
+                                currentlyActive.put(button,String.valueOf(Integer.parseInt(currentValues.get(button))));
+                                boolean isPair = checkPair();
+                                if(isPair){
+                                    button.setContentAreaFilled(false);
+                                    button.setOpaque(false);
+                                    buttonList.replace(button,"not active");
+                                    currentlyActive.remove(button);
+                                    currentValues.put(button, String.valueOf(Elevens.returnString(button.getName())));
+                                }
+                            }
+                        }
+                        if(status.equals("active")){
+                            button.setContentAreaFilled(false);
+                            button.setOpaque(false);
+                            buttonList.replace(button,"not active");
+                            currentlyActive.remove(button);
+                        }
+                        
+                         // Remove Face Cards
+                        if(Integer.parseInt(currentValues.get(button))==99){
+                             File filex = Elevens.Deck[deckposition];
+                             ImageIcon image = new ImageIcon("src/cards/"+filex.getName());
+                             System.out.println("Looking for "+ filex.getName());
+                             Image icon = image.getImage().getScaledInstance(100, 145, Image.SCALE_SMOOTH);
+                             image.setImage(icon);
+                             button.setIcon(image);
+                             currentValues.put(button, String.valueOf(Elevens.returnString(filex.getName())));
+                             deckposition = deckposition+1;
+                             currentlyActive.clear();
+                        }
+                        
+                    }
+                
+            });
+           
+            buttonLayout.add(button);
+        }
+    }
+    
+    public void nextCards(int position){
+        
+    }
+    
+    public boolean checkPair(){
+        int total = 0;
+        for(JButton key : currentlyActive.keySet()){
+            total = total + Integer.parseInt(currentlyActive.get(key));
+        }
+        System.out.println("Current total is: "+String.valueOf(total));
+        if(total==13){
+            System.out.println("A pair has been found!");
+            removeAllActive();
+            return true;
+        }
+        total = 0;
+        return false;
+    }
+    
+    public void removeAllActive(){
+        for(JButton key : currentlyActive.keySet()){
+            File file = Elevens.Deck[deckposition];
+            ImageIcon image = new ImageIcon("src/cards/"+file.getName());
+            System.out.println("Looking for "+ file.getName());
+            Image icon = image.getImage().getScaledInstance(100, 145, Image.SCALE_SMOOTH);
+            image.setImage(icon);
+            key.setIcon(image);
+            key.setContentAreaFilled(false);
+            key.setOpaque(false);
+            key.setName(file.getName());
+            buttonList.replace(key,"not active");
+            currentValues.replace(key,String.valueOf(Elevens.returnString(file.getName())));
+            deckposition = deckposition+1;
+        }
+        currentlyActive.clear();
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     // End of variables declaration//GEN-END:variables
 }
