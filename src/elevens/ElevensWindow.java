@@ -390,7 +390,8 @@ public final class ElevensWindow extends javax.swing.JFrame {
         }
         System.out.println("Current total is: "+String.valueOf(total));
         if(total==11){
-            System.out.println("A pair has been found!");
+            String greenBold = "\033[32;1m";
+            System.out.println(greenBold+"A pair has been found!");
             removeAllActive();
             return true;
         }
