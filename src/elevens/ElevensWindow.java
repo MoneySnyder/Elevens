@@ -428,9 +428,14 @@ public final class ElevensWindow extends javax.swing.JFrame {
 
     
     public void prepareDeck(int position){
-        if(position==51){
+        if(position==50){
             Elevens.shuffleDeck(Elevens.Deck);
             System.out.println("Deck has been shuffled.");
+            Container buttonLayout = jPanel5;
+            buttonLayout.removeAll();
+            buttonLayout.revalidate();
+            buttonLayout.repaint();
+            startGame();
         }
     }
 
