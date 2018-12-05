@@ -26,10 +26,11 @@ import javax.swing.border.Border;
 public final class ThirteensWindow extends javax.swing.JFrame {
 
     int deckposition;
+    int score;
     /**
      * Creates new form GamemodeWindow
      */
-    
+
     public ThirteensWindow() {
         initComponents();
         jLabel4.setText("Welcome, "+System.getProperty("user.name"));
@@ -53,6 +54,8 @@ public final class ThirteensWindow extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -109,7 +112,7 @@ public final class ThirteensWindow extends javax.swing.JFrame {
                         .addGap(49, 49, 49))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 268, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 126, Short.MAX_VALUE)
                         .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -155,21 +158,50 @@ public final class ThirteensWindow extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabel5.setBackground(new java.awt.Color(34, 165, 63));
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel5.setText("    Score : 0");
+        jLabel5.setOpaque(true);
+
+        jButton7.setBackground(new java.awt.Color(34, 165, 63));
+        jButton7.setFont(new java.awt.Font("Segoe UI", 0, 12)); // NOI18N
+        jButton7.setForeground(new java.awt.Color(255, 255, 255));
+        jButton7.setText("Reshuffle");
+        jButton7.setBorder(null);
+        jButton7.setBorderPainted(false);
+        jButton7.setFocusPainted(false);
+        jButton7.setFocusable(false);
+        jButton7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton7MouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(27, 27, 27)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(12, 12, 12)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(12, 12, 12))
         );
 
         jPanel3.setBackground(new java.awt.Color(255, 255, 255));
@@ -240,7 +272,7 @@ public final class ThirteensWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jButton5MouseClicked
@@ -250,6 +282,18 @@ public final class ThirteensWindow extends javax.swing.JFrame {
         setVisible(false);
     }//GEN-LAST:event_jButton6MouseClicked
 
+    private void jButton7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton7MouseClicked
+        Elevens.shuffleDeck(Elevens.Deck);
+        System.out.println("Deck has been shuffled.");
+        Container buttonLayout = jPanel5;
+        score = 0;
+        jLabel5.setText("    Score : "+String.valueOf(score));
+        buttonLayout.removeAll();
+        buttonLayout.revalidate();
+        buttonLayout.repaint();
+        startGame();
+    }//GEN-LAST:event_jButton7MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -257,7 +301,7 @@ public final class ThirteensWindow extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -276,57 +320,57 @@ public final class ThirteensWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(ThirteensWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-        /* Create and display the form 
+
+        /* Create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GamemodeWindow().setVisible(true);
             }
         //</editor-fold>
-        
-        /* Create and display the form 
+
+        /* Create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GamemodeWindow().setVisible(true);
             }
         //</editor-fold>
-        
-        /* Create and display the form 
+
+        /* Create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GamemodeWindow().setVisible(true);
             }
         //</editor-fold>
-        
-        /* Create and display the form 
+
+        /* Create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GamemodeWindow().setVisible(true);
             }
         //</editor-fold>
-        
-        /* Create and display the form 
+
+        /* Create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GamemodeWindow().setVisible(true);
             }
         //</editor-fold>
-        
-        /* Create and display the form 
+
+        /* Create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GamemodeWindow().setVisible(true);
             }
         //</editor-fold>
-        
-        /* Create and display the form 
+
+        /* Create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GamemodeWindow().setVisible(true);
             }
         //</editor-fold>
-        
-        /* Create and display the form 
+
+        /* Create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GamemodeWindow().setVisible(true);
@@ -339,11 +383,11 @@ public final class ThirteensWindow extends javax.swing.JFrame {
             new ThirteensWindow().setVisible(true);
         });
     }
-    
+
     public static Map<JButton, String> buttonList = new HashMap<JButton, String>();
     public static Map<JButton, String> currentlyActive = new HashMap<JButton, String>();
     public static Map<JButton, String> currentValues = new HashMap<JButton, String>();
-    
+
     public void startGame(){
         Container buttonLayout = jPanel5;
         for(int i = 0; i < 9; i++){
@@ -364,7 +408,7 @@ public final class ThirteensWindow extends javax.swing.JFrame {
             button.setName(file.getName());
             currentValues.put(button, String.valueOf(value));
             deckposition = 9;
-            
+
             buttonList.put(button, "not active");
             button.addActionListener(new ActionListener() {
                     public void actionPerformed(ActionEvent ae) {
@@ -382,6 +426,13 @@ public final class ThirteensWindow extends javax.swing.JFrame {
                                 currentlyActive.put(button,String.valueOf(Integer.parseInt(currentValues.get(button))));
                                 boolean isPair = checkPair();
                                 if(isPair){
+                                    score = score+100;
+                                    
+                                    if(score>Elevens.thirteenshs){
+                                        Elevens.thirteenshs = score;
+                                    }
+                                    
+                                    jLabel5.setText("    Score : "+String.valueOf(score));
                                     button.setContentAreaFilled(false);
                                     button.setOpaque(false);
                                     buttonList.replace(button,"not active");
@@ -396,7 +447,7 @@ public final class ThirteensWindow extends javax.swing.JFrame {
                             buttonList.replace(button,"not active");
                             currentlyActive.remove(button);
                         }
-                        
+
                          // Remove Face Cards
                         if(Integer.parseInt(currentValues.get(button))==99){
                              File filex = Elevens.Deck[deckposition];
@@ -409,34 +460,39 @@ public final class ThirteensWindow extends javax.swing.JFrame {
                              deckposition = deckposition+1;
                              currentlyActive.clear();
                         }
-                        
+
                     }
-                
             });
-           
+
             buttonLayout.add(button);
         }
     }
+
     
-    public void nextCards(int position){
-        
+    public void prepareDeck(int position){
+        if(position==51){
+            Elevens.shuffleDeck(Elevens.Deck);
+            System.out.println("Deck has been shuffled.");
+        }
     }
-    
+
     public boolean checkPair(){
+        prepareDeck(deckposition);
         int total = 0;
         for(JButton key : currentlyActive.keySet()){
             total = total + Integer.parseInt(currentlyActive.get(key));
         }
         System.out.println("Current total is: "+String.valueOf(total));
         if(total==13){
-            System.out.println("A pair has been found!");
+            String greenBold = "\033[32;1m";
+            System.out.println(greenBold+"A pair has been found!");
             removeAllActive();
             return true;
         }
         total = 0;
         return false;
     }
-    
+
     public void removeAllActive(){
         for(JButton key : currentlyActive.keySet()){
             File file = Elevens.Deck[deckposition];
@@ -454,15 +510,17 @@ public final class ThirteensWindow extends javax.swing.JFrame {
         }
         currentlyActive.clear();
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;

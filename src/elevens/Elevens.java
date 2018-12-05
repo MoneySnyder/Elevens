@@ -18,6 +18,10 @@ public class Elevens {
 
     public static File[] Deck = new File("src/cards").listFiles(); 
 
+    public static int elevenshs;
+    public static int twelveshs;
+    public static int thirteenshs;
+    
     /**
      * @param args the command line arguments
      */
