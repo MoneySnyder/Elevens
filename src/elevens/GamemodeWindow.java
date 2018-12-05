@@ -14,7 +14,7 @@ public class GamemodeWindow extends javax.swing.JFrame {
     /**
      * Creates new form GamemodeWindow
      */
-    
+
     public GamemodeWindow() {
         initComponents();
         jLabel4.setText("Welcome, "+System.getProperty("user.name"));
@@ -366,7 +366,7 @@ public class GamemodeWindow extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    
+
     private void jButton5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton5MouseClicked
         System.exit(0);
     }//GEN-LAST:event_jButton5MouseClicked
@@ -393,7 +393,7 @@ public class GamemodeWindow extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
@@ -412,22 +412,22 @@ public class GamemodeWindow extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(GamemodeWindow.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        
-        /* Create and display the form 
+
+        /* Create and display the form
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new GamemodeWindow().setVisible(true);
             }
         });*/
     }
-    
+
     String computerusername = System.getProperty("user.name");
     public static void displayGUI(){
         java.awt.EventQueue.invokeLater(() -> {
             new GamemodeWindow().setVisible(true);
         });
     }
-    
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;

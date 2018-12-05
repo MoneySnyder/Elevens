@@ -385,11 +385,11 @@ public final class ElevensWindow extends javax.swing.JFrame {
                                 boolean isPair = checkPair();
                                 if(isPair){
                                     score = score+100;
-                                    
+
                                     if(score>Elevens.elevenshs){
                                         Elevens.elevenshs = score;
                                     }
-                                    
+
                                     jLabel5.setText("    Score : "+String.valueOf(score));
                                     button.setContentAreaFilled(false);
                                     button.setOpaque(false);
@@ -426,7 +426,7 @@ public final class ElevensWindow extends javax.swing.JFrame {
         }
     }
 
-    
+
     public void prepareDeck(int position){
         if(position==50){
             Elevens.shuffleDeck(Elevens.Deck);

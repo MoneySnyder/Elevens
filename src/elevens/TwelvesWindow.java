@@ -400,8 +400,8 @@ public final class TwelvesWindow extends javax.swing.JFrame {
                                 if(isPair){
                                     score = score+100;
                                     
-                                    if(score>Elevens.twelveshs){
-                                        Elevens.twelveshs = score;
+                                    if(score>Elevens.elevenshs){
+                                        Elevens.elevenshs = score;
                                     }
                                     
                                     jLabel5.setText("    Score : "+String.valueOf(score));
@@ -442,9 +442,14 @@ public final class TwelvesWindow extends javax.swing.JFrame {
 
     
     public void prepareDeck(int position){
-        if(position==51){
+        if(position==50){
             Elevens.shuffleDeck(Elevens.Deck);
             System.out.println("Deck has been shuffled.");
+            Container buttonLayout = jPanel5;
+            buttonLayout.removeAll();
+            buttonLayout.revalidate();
+            buttonLayout.repaint();
+            startGame();
         }
     }
 
@@ -455,7 +460,7 @@ public final class TwelvesWindow extends javax.swing.JFrame {
             total = total + Integer.parseInt(currentlyActive.get(key));
         }
         System.out.println("Current total is: "+String.valueOf(total));
-        if(total==12){
+        if(total==11){
             String greenBold = "\033[32;1m";
             System.out.println(greenBold+"A pair has been found!");
             removeAllActive();
