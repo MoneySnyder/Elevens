@@ -408,6 +408,7 @@ public final class ElevensWindow extends javax.swing.JFrame {
 
                          // Remove Face Cards
                         if(Integer.parseInt(currentValues.get(button))==99){
+                             prepareDeck(deckposition);
                              File filex = Elevens.Deck[deckposition];
                              ImageIcon image = new ImageIcon("src/cards/"+filex.getName());
                              System.out.println("Looking for "+ filex.getName());
@@ -428,13 +429,14 @@ public final class ElevensWindow extends javax.swing.JFrame {
 
 
     public void prepareDeck(int position){
-        if(position==50){
+        if(position==49){
             Elevens.shuffleDeck(Elevens.Deck);
             System.out.println("Deck has been shuffled.");
             Container buttonLayout = jPanel5;
             buttonLayout.removeAll();
             buttonLayout.revalidate();
             buttonLayout.repaint();
+            WinnerWindow.displayGUI();
             startGame();
         }
     }
