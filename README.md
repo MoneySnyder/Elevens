@@ -4,6 +4,7 @@ This lab is the first of the AP Labs that the college board has made for the AP 
 ## Authored Information
 Programmer
 > cs.evsnyder
+
 Version
 > 1.0
 
