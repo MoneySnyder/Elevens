@@ -400,8 +400,8 @@ public final class TwelvesWindow extends javax.swing.JFrame {
                                 if(isPair){
                                     score = score+100;
                                     
-                                    if(score>Elevens.elevenshs){
-                                        Elevens.elevenshs = score;
+                                    if(score>Elevens.twelveshs){
+                                        Elevens.twelveshs = score;
                                     }
                                     
                                     jLabel5.setText("    Score : "+String.valueOf(score));
